@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import "./App.css";
+import Header from "./Components/Organism/Header";
+import HomePage from "./Pages/HomePage";
+import BlogsPage from "./Pages/BlogsPage";
+import AboutPage from "./Pages/AboutPage";
+import ProjectsPage from "./Pages/ProjectsPage";
+import ContactPage from "./Pages/ContactPage";
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["Zilla Slab"].join(","),
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Switch>
+          <Route path="/projects">
+            <ProjectsPage />
+          </Route>
+          <Route path="/blogs">
+            <BlogsPage />
+          </Route>
+          <Route path="/about">
+            <AboutPage />
+          </Route>
+          <Route path="/contact">
+            <ContactPage />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </ThemeProvider>
+    </Router>
   );
 }
 
